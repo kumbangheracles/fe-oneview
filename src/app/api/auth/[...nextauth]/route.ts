@@ -1,9 +1,9 @@
 import environtment from "@/config/environtment";
-import NextAuth from "next-auth";
+import NextAuth, { Account } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { JWTExtend, SessionExtend, UserExtend } from "@/types/Auth";
 import authServices from "@/services/auth.service";
-
+import GoogleProvider from "next-auth/providers/google";
 const handler = NextAuth({
   session: {
     strategy: "jwt",
@@ -47,13 +47,36 @@ const handler = NextAuth({
         }
       },
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
 
   callbacks: {
-    async jwt({ token, user }: { token: JWTExtend; user: UserExtend | null }) {
+    async jwt({
+      token,
+      user,
+      account,
+    }: {
+      token: JWTExtend;
+      user: UserExtend | null;
+      account?: Account | null;
+    }) {
       if (user) {
         token.user = user;
       }
+
+      // if (account?.provider === "google") {
+      //   token.user = {
+      //     _id: token.sub,
+      //     name: token.name,
+      //     email: token.email,
+      //     picture: token.picture,
+      //     provider: "google",
+      //   } as UserExtend;
+      // }
 
       return token;
     },

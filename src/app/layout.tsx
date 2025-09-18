@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistMono.variable} ${openSans.variable} antialiased h-screen w-screen ${baseBg}`}
+        className={`${geistMono.variable} ${openSans.variable} antialiased h-screen w-screen font-mono ${baseBg}`}
       >
         <SessionProviderWrapper>
           <ReactQueryProvider>{children}</ReactQueryProvider>

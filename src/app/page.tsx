@@ -1,4 +1,5 @@
 import AppLayout from "@/components/AppLayout";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,23 +8,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ArrowBigRight } from "lucide-react";
 
 export default function Home() {
   return (
     <AppLayout>
       <div className="p-4 w-screen h-screen flex justify-center items-center font-sans">
-        <Card className="p-4">
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-            {/* <CardAction>Card Action</CardAction> */}
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter>
+        <Card className="p-4 flex justify-center flex-col items-center gap-4">
+          <h4>Let's see what we have for you</h4>
+          <Button>
+            <ArrowBigRight />
+          </Button>
         </Card>
       </div>
     </AppLayout>

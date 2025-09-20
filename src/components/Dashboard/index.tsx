@@ -34,7 +34,6 @@ const DashboardPage = (prop: PropTypes) => {
       toast("Logout Success ! ! !");
     } catch (error) {
       toast("Logout Failed ! ! !");
-      console.log("Error logout: ", error);
     } finally {
       setIsModalOpen(false);
     }
@@ -48,8 +47,6 @@ const DashboardPage = (prop: PropTypes) => {
 
     return `/images/${src}`;
   };
-
-  console.log("Session: ", session);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center">

@@ -21,7 +21,6 @@ const UploadProfileImgPage = () => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  console.log("Session: ", session);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -48,7 +47,6 @@ const UploadProfileImgPage = () => {
 
       router.push("/dashboard");
     } catch (error) {
-      console.log("Error: ", error);
     } finally {
       setLoading(true);
     }
@@ -76,8 +74,6 @@ const UploadProfileImgPage = () => {
           profilePicture: url,
         }
       );
-
-      console.log("Respatch: ", respatch);
 
       toast("Success add profile picture ! ! !");
 

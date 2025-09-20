@@ -66,8 +66,6 @@ const Login = () => {
         redirect: false,
       });
 
-      console.log("Login Response: ", response);
-
       // showError("Login Success", "Welcome to my web");
       setTimeout(() => {
         router.push("/login-success");

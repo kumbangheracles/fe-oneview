@@ -149,13 +149,9 @@ const Register = () => {
 
       const response = await authServices.register(payload);
 
-      console.log("Registration response:", response);
-
       toast("Registration Success", {
         description: "You can login now!",
       });
-
-      console.log("Payload: ", payload);
 
       setTimeout(() => {
         router.push("/auth/login");

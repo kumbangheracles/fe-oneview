@@ -5,7 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import ReactQueryProvider from "@/components/QueryProvider";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
-
+import { Toaster } from "@/components/ui/sonner";
+import SessionWatcher from "@/components/SessionWatcher";
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
 //   subsets: ["latin"],
@@ -41,6 +42,13 @@ export default function RootLayout({
       >
         <SessionProviderWrapper>
           <ReactQueryProvider>{children}</ReactQueryProvider>
+          <Toaster
+            theme="light"
+            richColors
+            position="top-right"
+            className="base-sky-bg text-center text-2xl"
+          />
+          <SessionWatcher />
         </SessionProviderWrapper>
       </body>
     </html>

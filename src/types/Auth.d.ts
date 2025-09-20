@@ -1,5 +1,6 @@
 import { Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
+import { UserProperties } from "./User.type";
 
 interface IRegister {
   fullName: string;
@@ -21,14 +22,17 @@ interface IActivation {
 interface UserExtend extends User {
   accessToken?: string;
   role?: string;
+  dataUser?: UserProperties;
 }
 
 interface SessionExtend extends Session {
   accessToken?: string;
+  dataUser?: UserProperties;
 }
 
 interface JWTExtend extends JWT {
   user?: UserExtend;
+  expiresAt?: number;
 }
 
 export type {

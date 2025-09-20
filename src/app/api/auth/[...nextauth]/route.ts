@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { JWTExtend, SessionExtend, UserExtend } from "@/types/Auth";
 import authServices from "@/services/auth.service";
 import GoogleProvider from "next-auth/providers/google";
+import { UserProperties } from "@/types/User.type";
 const handler = NextAuth({
   session: {
     strategy: "jwt",
@@ -27,30 +28,35 @@ const handler = NextAuth({
           password: string;
         };
 
-        const result = await authServices.login({ identifier, password });
+        if (identifier !== "google") {
+          const result = await authServices.login({
+            identifier: identifier,
+            password: password,
+          });
 
-        const accessToken = result.data.data;
+          const accessToken = result.data.data;
+          const me = await authServices.getProfileWithToken(accessToken);
 
-        const me = await authServices.getProfileWithToken(accessToken);
-        const user = me.data.data;
-
-        if (
-          accessToken &&
-          result.status === 200 &&
-          user._id &&
-          me.status === 200
-        ) {
-          user.accessToken = accessToken;
-          return user;
-        } else {
+          if (result.status === 200 && me.status === 200) {
+            return { ...me.data.data, accessToken };
+          }
           return null;
         }
+
+        const token = password;
+        const me = await authServices.getProfileWithToken(token);
+
+        if (me.status === 200) {
+          return { ...me.data.data, accessToken: token };
+        }
+
+        return null;
       },
     }),
 
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: environtment.AUTH_CLIENTID as string,
+      clientSecret: environtment.AUTH_CLIENT_SECRET as string,
     }),
   ],
 
@@ -66,17 +72,23 @@ const handler = NextAuth({
     }) {
       if (user) {
         token.user = user;
+        token.expiresAt = (Date.now() + 60 * 60 * 1000) as number;
       }
 
-      // if (account?.provider === "google") {
-      //   token.user = {
-      //     _id: token.sub,
-      //     name: token.name,
-      //     email: token.email,
-      //     picture: token.picture,
-      //     provider: "google",
-      //   } as UserExtend;
-      // }
+      if (account?.provider === "google" && account.access_token) {
+        try {
+          const res = await authServices.loginWithGoogle(account.access_token);
+          const userData = res.data.data;
+          token.user = { ...user, ...userData };
+          token.expiresAt = Date.now() + 60 * 60 * 1000;
+        } catch (error) {
+          console.error("Google login error", error);
+        }
+      }
+
+      if (token.expiresAt && Date.now() > token.expiresAt) {
+        return { user: undefined } as JWTExtend;
+      }
 
       return token;
     },
@@ -88,8 +100,9 @@ const handler = NextAuth({
       session: SessionExtend;
       token: JWTExtend;
     }) {
-      session.user = token.user;
+      session.user = token.user as UserProperties;
       session.accessToken = token.user?.accessToken;
+      session.dataUser = token.user?.dataUser;
       return session;
     },
   },

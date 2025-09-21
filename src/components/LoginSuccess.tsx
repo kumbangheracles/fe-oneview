@@ -36,7 +36,7 @@ const LoginSuccessPage = () => {
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center">
-        <div className="flex flex-col justify-center items-center gap-4 ">
+        <div className="flex flex-col justify-center items-center text-center gap-4 ">
           <p className="text-3xl text-sky-950">Login Success</p>
 
           <p>You&apos;ll be redirected to dashboard page, please wait</p>

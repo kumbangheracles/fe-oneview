@@ -116,22 +116,7 @@ const Login = () => {
             }
           />
         </div>
-        <div className="flex justify-between ">
-          <div className="flex gap-1">
-            <span className="text-black text-[7px] sm:text-sm text-right transition-all">
-              {"Don't have account?"}
-            </span>
-            <span
-              onClick={() => router.push("/auth/register")}
-              className="text-black text-[7px] sm:text-sm text-right underline cursor-pointer hover:text-gray-300 transition-all"
-            >
-              Sign Up
-            </span>
-          </div>
-          <span className="text-black text-[7px] sm:text-sm text-right cursor-pointer hover:text-gray-300 transition-all">
-            Forgot password?
-          </span>
-        </div>
+
         <div className="flex justify-center w-full items-center gap-2 sm:flex-col">
           <Button
             className="bg-black text-white w-full h-[20px] text-[7px] sm:text-sm sm:h-auto"
@@ -150,6 +135,17 @@ const Login = () => {
             <FaGoogle className="text-[7px] sm:text-[17px]" />
             <span>Sign In With Google</span>
           </Card>
+        </div>
+        <div className="flex gap-1 justify-center">
+          <span className="text-black text-[7px] sm:text-sm text-right transition-all">
+            {"Don't have account?"}
+          </span>
+          <span
+            onClick={() => router.push("/auth/register")}
+            className="text-black text-[7px] sm:text-sm text-right underline cursor-pointer hover:text-gray-300 transition-all"
+          >
+            Sign Up
+          </span>
         </div>
       </CardContent>
     </Card>

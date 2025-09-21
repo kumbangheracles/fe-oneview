@@ -45,7 +45,7 @@ const GoogleLoginSuccess = () => {
     <>
       {token ? (
         <div className="w-screen h-screen flex justify-center items-center">
-          <div className="flex flex-col justify-center items-center gap-4 ">
+          <div className="flex flex-col justify-center items-center gap-4 text-center">
             <p className="text-3xl text-sky-950">Login with Google Success</p>
 
             <p>{"You'll be redirect to dashboard page, please wait"}</p>

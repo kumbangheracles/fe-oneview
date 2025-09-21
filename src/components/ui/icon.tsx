@@ -1,14 +1,13 @@
 "use client";
 import Image from "next/image";
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
 interface PropTypes extends React.InputHTMLAttributes<HTMLDivElement> {
   iconSrc: string;
 }
 
 const CustomIcon = React.forwardRef<HTMLDivElement, PropTypes>(
-  ({ className, iconSrc, ...props }, ref) => {
+  ({ iconSrc, ...props }, ref) => {
     return (
       <>
         <div

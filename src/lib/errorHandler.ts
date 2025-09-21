@@ -1,13 +1,22 @@
 import { toast } from "sonner";
 
-export const ErrorHandler = (
-  error: any,
-  backendMsg: string = error?.response?.data?.message || "Something went wrong"
-) => {
-  toast(backendMsg);
+export const ErrorHandler = (error: unknown) => {
+  let message = "Something went wrong";
+
+  if (error instanceof Error) {
+    message = error.message;
+  } else if (
+    typeof error === "object" &&
+    error !== null &&
+    "response" in error
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    message = (error as any).response?.data?.message || message;
+  }
+
+  toast(message);
   console.log("Error from backend:", error);
 };
-
 export const validatePhoneNumber = (phoneNumber: string | null) => {
   if (!phoneNumber) {
     return "Phone number is required";

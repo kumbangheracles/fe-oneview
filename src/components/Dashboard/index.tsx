@@ -1,12 +1,6 @@
 "use client";
 
-import { SlLogout } from "react-icons/sl";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
@@ -15,7 +9,6 @@ import { Badge } from "../ui/badge";
 import { useState } from "react";
 import { ModalAlert } from "../ModalAlert";
 import { toast } from "sonner";
-import { encrypt } from "@/lib/encryption";
 import { useRouter } from "next/navigation";
 interface PropTypes {
   role: "admin" | "member";
@@ -24,7 +17,7 @@ interface PropTypes {
 const DashboardPage = (prop: PropTypes) => {
   const { role } = prop;
   const session = useSession();
-  const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const router = useRouter();
 
   const handleLogout = () => {
@@ -33,6 +26,7 @@ const DashboardPage = (prop: PropTypes) => {
 
       toast("Logout Success ! ! !");
     } catch (error) {
+      console.log("Error: ", error);
       toast("Logout Failed ! ! !");
     } finally {
       setIsModalOpen(false);

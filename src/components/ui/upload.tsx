@@ -2,10 +2,14 @@
 
 import { Input } from "@/components/ui/input";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function FileUpload() {
   const [fileName, setFileName] = useState<string>("");
+
+  useEffect(() => {
+    console.log(fileName);
+  }, [fileName]);
 
   return (
     <div className="flex flex-col gap-2">

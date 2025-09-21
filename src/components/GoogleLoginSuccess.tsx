@@ -1,14 +1,12 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Button } from "./ui/button";
-import { ArrowBigRight } from "lucide-react";
+
 import { toast } from "sonner";
 import { useEffect } from "react";
-import oneAxios from "@/lib/axios/oneAxios";
 import { signIn, useSession } from "next-auth/react";
 import NotFoundPage from "./NotFound";
 const GoogleLoginSuccess = () => {
-  const { data, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -50,7 +48,7 @@ const GoogleLoginSuccess = () => {
           <div className="flex flex-col justify-center items-center gap-4 ">
             <p className="text-3xl text-sky-950">Login with Google Success</p>
 
-            <p>You'll be redirect to dashboard page, please wait</p>
+            <p>{"You'll be redirect to dashboard page, please wait"}</p>
             {/* <Button
               className="mt-4 w-fit"
               onClick={() => router.push("/dashboard")}

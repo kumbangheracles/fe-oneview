@@ -9,10 +9,8 @@ import authServices from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { initialUser, UserProperties } from "@/types/User.type";
 import { CustomSelect } from "@/components/CustomSelect";
-import oneAxios from "@/lib/axios/oneAxios";
 import { toast } from "sonner";
 import { ErrorHandler, validatePhoneNumber } from "@/lib/errorHandler";
-import { MdErrorOutline } from "react-icons/md";
 interface PasswordInputProps {
   placeholder: string;
   value: string;
@@ -147,7 +145,7 @@ const Register = () => {
         phoneNumber: data.phoneNumber,
       };
 
-      const response = await authServices.register(payload);
+      await authServices.register(payload);
 
       toast("Registration Success", {
         description: "You can login now!",

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Open_Sans } from "next/font/google";
+import { Geist_Mono, Open_Sans } from "next/font/google";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
 import ReactQueryProvider from "@/components/QueryProvider";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 import { Toaster } from "@/components/ui/sonner";

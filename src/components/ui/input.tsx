@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -24,12 +23,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const [isFocus, setIsFocus] = useState<boolean>(false);
-
     return (
       <div
-        // onFocus={() => setIsFocus(true)}
-
         className={`flex items-center rounded-md border border-input bg-gray-50 px-3 py-1 shadow-sm focus-within:ring-1 focus-within:ring-ring transition-all`}
       >
         {iconLeft && (

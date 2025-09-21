@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
-import { Send, SkipForward, Upload } from "lucide-react";
+import { Send, Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import oneAxios from "@/lib/axios/oneAxios";
@@ -18,7 +18,7 @@ const UploadProfileImgPage = () => {
   const [preview, setPreview] = useState<string>(
     session?.data?.user?.profilePicture as string
   );
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +47,7 @@ const UploadProfileImgPage = () => {
 
       router.push("/dashboard");
     } catch (error) {
+      console.log("Error: ", error);
     } finally {
       setLoading(true);
     }
@@ -68,12 +69,9 @@ const UploadProfileImgPage = () => {
 
       const url = res.data.data.secure_url;
 
-      const respatch = await oneAxios.patch(
-        `/auth/update/${session?.data?.user?._id}`,
-        {
-          profilePicture: url,
-        }
-      );
+      await oneAxios.patch(`/auth/update/${session?.data?.user?._id}`, {
+        profilePicture: url,
+      });
 
       toast("Success add profile picture ! ! !");
 
@@ -84,7 +82,6 @@ const UploadProfileImgPage = () => {
           profilePicture: url,
         },
       });
-      // router.push("/dashboard");
       setIsSuccess(true);
     } catch (error) {
       ErrorHandler(error);

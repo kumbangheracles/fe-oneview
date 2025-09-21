@@ -2,11 +2,9 @@
 import { ArrowBigRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 const NotFoundPage = () => {
   const router = useRouter();
-  const session = useSession();
 
   return (
     <div className="w-screen h-screen flex justify-center items-center">

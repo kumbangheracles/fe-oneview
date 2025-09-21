@@ -1,5 +1,5 @@
 import oneAxios from "@/lib/axios/oneAxios";
-import { IActivation, ILogin, IRegister } from "@/types/Auth";
+import { IActivation, ILogin } from "@/types/Auth";
 import { UserProperties } from "@/types/User.type";
 
 const authServices = {

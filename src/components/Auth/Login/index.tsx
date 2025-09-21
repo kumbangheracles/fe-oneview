@@ -1,36 +1,28 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import { FaEyeSlash, FaEye, FaGoogle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { CustomIcon } from "@/components/ui/icon";
-import googleIcon from "../../../assets/icons/google.svg";
-import { signIn, useSession } from "next-auth/react";
+
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ImSpinner2 } from "react-icons/im";
 import { toast } from "sonner";
 import { ILogin } from "@/types/Auth";
 import { ErrorHandler } from "@/lib/errorHandler";
-import authServices from "@/services/auth.service";
 import environtment from "@/config/environtment";
 
 const Login = () => {
-  const [openPass, setOpenPass] = useState<Boolean>(false);
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [openPass, setOpenPass] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [dataUser, setDataUser] = useState<ILogin>({
     identifier: "",
     password: "",
   });
   const router = useRouter();
-  const session = useSession();
 
   const showError = (title: string, description: string) => {
     toast(title, { description });
@@ -62,7 +54,7 @@ const Login = () => {
         password: data.password,
       };
 
-      const response = await signIn("credentials", {
+      await signIn("credentials", {
         ...payload,
         redirect: false,
       });
@@ -80,7 +72,7 @@ const Login = () => {
     }
   };
 
-  console.log("URL: ", environtment.API_URL);
+  // console.log("URL: ", environtment.API_URL);
 
   return (
     <Card className="base-sky-bg border shadow-md font-mono w-[450px] sm:p-4 m-2">
@@ -127,7 +119,7 @@ const Login = () => {
         <div className="flex justify-between ">
           <div className="flex gap-1">
             <span className="text-black text-[7px] sm:text-sm text-right transition-all">
-              Don't have account?
+              {"Don't have account?"}
             </span>
             <span
               onClick={() => router.push("/auth/register")}

@@ -111,7 +111,7 @@ const UploadProfileImgPage = () => {
 
         <CardHeader>
           <span className="text-[10px] sm:text-[17px]">
-            Want to add some profile pict?
+            {!isSuccess && "Want to add some profile pict?"}
           </span>
         </CardHeader>
         <CardContent className="flex flex-col justify-center items-center gap-6">

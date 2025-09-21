@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { ILogin } from "@/types/Auth";
 import { ErrorHandler } from "@/lib/errorHandler";
 import authServices from "@/services/auth.service";
+import environtment from "@/config/environtment";
 
 const Login = () => {
   const [openPass, setOpenPass] = useState<Boolean>(false);
@@ -78,6 +79,8 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  console.log("URL: ", environtment.API_URL);
 
   return (
     <Card className="base-sky-bg border shadow-md font-mono w-[450px] sm:p-4 m-2">
@@ -148,7 +151,7 @@ const Login = () => {
           <Card
             className={`w-full flex items-center gap-3 justify-center cursor-pointer rounded-md hover:bg-sky-300 transition-all p-1 select-none shadow-md text-[7px] h-[20px] sm:h-auto sm:text-sm`}
             onClick={() =>
-              window.open("http://localhost:3001/api/auth/google", "_self")
+              window.open(`${environtment.API_URL}/auth/google`, "_self")
             }
           >
             {/* <CustomIcon iconSrc={googleIcon} className="w-[7px] h-[7px]" /> */}

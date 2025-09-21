@@ -70,7 +70,7 @@ const DashboardPage = (prop: PropTypes) => {
             <Image
               src={getProfileImage(session?.data?.user?.profilePicture)}
               alt="profile picture"
-              className="object-contain w-full h-full"
+              className="object-cover"
               width={100}
               height={100}
             />
@@ -113,14 +113,17 @@ const DashboardPage = (prop: PropTypes) => {
               {session?.data?.user?.email}
             </span>
           </div>
-          <div className="flex gap-2 items-center">
-            <span className="w-[100px] font-bold bg-white rounded-md border-black border-2 p-1">
-              Phone Number
-            </span>
-            <span className="w-full bg-white rounded-md border-black border-2 p-1">
-              {session?.data?.user?.phoneNumber || "Not Availble"}
-            </span>
-          </div>
+
+          {session?.data?.user?.provider === "local" && (
+            <div className="flex gap-2 items-center">
+              <span className="w-[100px] font-bold bg-white rounded-md border-black border-2 p-1">
+                Phone Number
+              </span>
+              <span className="w-full bg-white rounded-md border-black border-2 p-1">
+                {session?.data?.user?.phoneNumber || "Not Availble"}
+              </span>
+            </div>
+          )}
         </CardContent>
 
         <ModalAlert
